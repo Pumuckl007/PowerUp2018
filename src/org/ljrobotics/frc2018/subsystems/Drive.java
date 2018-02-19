@@ -12,6 +12,7 @@ import org.ljrobotics.lib.util.control.Lookahead;
 import org.ljrobotics.lib.util.control.Path;
 import org.ljrobotics.lib.util.control.PathFollower;
 import org.ljrobotics.lib.util.control.SynchronousPIDF;
+import org.ljrobotics.lib.util.drivers.Accelerometer;
 import org.ljrobotics.lib.util.drivers.CANTalonFactory;
 import org.ljrobotics.lib.util.drivers.LazyCANTalon;
 import org.ljrobotics.lib.util.drivers.LazyGyroscope;
@@ -50,8 +51,10 @@ public class Drive extends Subsystem implements LoopingSubsystem {
 
 			RobotState robotState = RobotState.getInstance();
 			LazyGyroscope gyro = LazyGyroscope.getInstance();
+			
+			Accelerometer accelerometer = new Accelerometer();
 
-			instance = new Drive(masterLeft, masterRight, slaveLeft, slaveRight, robotState, gyro);
+			instance = new Drive(masterLeft, masterRight, slaveLeft, slaveRight, robotState, gyro, accelerometer);
 		}
 		return instance;
 	}
@@ -70,6 +73,8 @@ public class Drive extends Subsystem implements LoopingSubsystem {
 	private Gyro gyro;
 	
 	private Rotation2d gyroZero;
+	
+	private Accelerometer accelerometer;
 
 	// The drive loop definition
 	private class DriveLoop implements Loop {
@@ -144,7 +149,7 @@ public class Drive extends Subsystem implements LoopingSubsystem {
 	 *            the back right talon motor controller
 	 */
 	public Drive(TalonSRX masterLeft, TalonSRX masterRight, TalonSRX slaveLeft, TalonSRX slaveRight, RobotState robotState,
-			Gyro gyro) {
+			Gyro gyro, Accelerometer accelerometer) {
 
 		this.robotState = robotState;
 		this.gyro = gyro;
@@ -196,6 +201,8 @@ public class Drive extends Subsystem implements LoopingSubsystem {
 		
 		this.gyroZero = Rotation2d.fromDegrees(0);
 		this.speedLimit = 1;
+		
+		this.accelerometer = accelerometer;
 	}
 	
 	@Override

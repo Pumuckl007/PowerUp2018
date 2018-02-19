@@ -3,6 +3,7 @@ package org.ljrobotics.frc2018.subsystems;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -23,12 +24,12 @@ import org.ljrobotics.lib.util.control.Path;
 import org.ljrobotics.lib.util.control.PathBuilder;
 import org.ljrobotics.lib.util.control.PathBuilder.Waypoint;
 import org.ljrobotics.lib.util.control.SynchronousPIDF;
+import org.ljrobotics.lib.util.drivers.Accelerometer;
 import org.ljrobotics.lib.util.math.RigidTransform2d;
 import org.ljrobotics.lib.util.math.Rotation2d;
 import org.ljrobotics.lib.util.math.Translation2d;
 import org.ljrobotics.lib.util.math.Twist2d;
 import org.mockito.ArgumentCaptor;
-import static org.mockito.Mockito.eq;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -48,6 +49,8 @@ public class DriveTest {
 	private RobotState robotState;
 	private Gyro gyro;
 	
+	private Accelerometer accelerometer;
+	
 	static {
 		// prevents exception during test
 		HLUsageReporting.SetImplementation(new DummyReporter());
@@ -62,8 +65,10 @@ public class DriveTest {
 
 		robotState = mock(RobotState.class);
 		gyro = mock(Gyro.class);
+		
+		accelerometer = mock(Accelerometer.class);
 
-		drive = new Drive(frontLeft, frontRight, backLeft, backRight, robotState, gyro);
+		drive = new Drive(frontLeft, frontRight, backLeft, backRight, robotState, gyro, accelerometer);
 	}
 
 	@Test
