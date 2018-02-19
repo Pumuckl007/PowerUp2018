@@ -16,7 +16,9 @@ import java.util.Map.Entry;
 import org.junit.Before;
 import org.junit.Test;
 import org.ljrobotics.frc2018.Constants;
+import org.ljrobotics.frc2018.loops.Loop;
 import org.ljrobotics.frc2018.state.RobotState;
+import org.ljrobotics.lib.util.DebugLooper;
 import org.ljrobotics.lib.util.DriveSignal;
 import org.ljrobotics.lib.util.DummyReporter;
 import org.ljrobotics.lib.util.InterpolatingDouble;
@@ -41,6 +43,7 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 public class DriveTest {
 
 	private Drive drive;
+	private Loop driveLoop;
 	private TalonSRX frontLeft;
 	private TalonSRX frontRight;
 	private TalonSRX backLeft;
@@ -69,6 +72,9 @@ public class DriveTest {
 		accelerometer = mock(Accelerometer.class);
 
 		drive = new Drive(frontLeft, frontRight, backLeft, backRight, robotState, gyro, accelerometer);
+		DebugLooper looper = new DebugLooper();
+		drive.registerEnabledLoops(looper);
+		this.driveLoop = looper.getLoop();
 	}
 
 	@Test
@@ -231,6 +237,20 @@ public class DriveTest {
 		Constants.DRIVE_ENCODER_TICKS_PER_ROTATION_LEFT = Constants.DRIVE_ENCODER_TICKS_PER_ROTATION_RIGHT = 200;
 		when(this.frontRight.getSelectedSensorVelocity(0)).thenReturn(200);
 		assertEquals(10*Math.PI, this.drive.getRightVelocityInchesPerSec(), 0.00001);
+	}
+	
+	@Test
+	public void whenTippedBackwardMovesBackward() {
+		setAccelerometerAxis(4, 0, 4);
+		this.drive.setOpenLoop(new DriveSignal(1,1));
+		this.driveLoop.onLoop(0);
+		verifyTalons(ControlMode.PercentOutput, -1, -1);
+	}
+	
+	public void setAccelerometerAxis(double x, double y, double z) {
+		when(this.accelerometer.getX()).thenReturn(x);
+		when(this.accelerometer.getY()).thenReturn(y);
+		when(this.accelerometer.getZ()).thenReturn(z);
 	}
 
 	private void verifyTalons(ControlMode mode, double frontLeft, double frontRight) {

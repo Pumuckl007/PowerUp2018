@@ -73,6 +73,8 @@ public class Constants extends ConstantsBase {
 	public static double DRIVE_Ki = 0.0000001;
 	public static double DRIVE_Kd = 0;
 	public static double DRIVE_Kf = 0.035;
+	
+	public static double MAX_TIP_ANGLE = 20; //in degrees
 	// -----------------------------------------------------------------------------------------------
 	// Intake
 	public static double SUCK_SPEED = 1;

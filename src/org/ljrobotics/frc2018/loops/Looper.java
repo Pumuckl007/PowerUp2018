@@ -48,6 +48,11 @@ public class Looper {
         running = false;
         loops = new ArrayList<>();
     }
+    
+    public Looper(boolean debug) {
+    	this.notifier = null;
+    	this.loops = null;
+    }
 
     /**
      * Registers a loop to be run periodically.

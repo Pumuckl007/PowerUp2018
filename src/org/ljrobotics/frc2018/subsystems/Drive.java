@@ -96,11 +96,14 @@ public class Drive extends Subsystem implements LoopingSubsystem {
 			case TURNING:
 				updateTurn(timestamp);
 				break;
+			case OPEN_LOOP:
+				updateTipping();
+				break;
 			default:
 
 			}
 		}
-		
+
 		public void onStop( double timestamp ) {
 			
 		}
@@ -425,6 +428,23 @@ public class Drive extends Subsystem implements LoopingSubsystem {
 			leftMaster.setNeutralMode(neutralMode);
 			leftSlave.setNeutralMode(neutralMode);
 		}
+	}
+	
+	/**
+	 * Called periodically in open loop to prevent tipping
+	 */
+	private void updateTipping() {
+		
+	}
+	
+	/**
+	 * @return the angle that the robot is tipped
+	 */
+	private double getTipAngle() {
+		double x = this.accelerometer.getX();
+		double z = this.accelerometer.getY();
+		double angle = Math.atan2(z, x);
+		return Math.toDegrees(angle);
 	}
 
 	@Override
