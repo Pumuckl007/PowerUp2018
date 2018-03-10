@@ -2,10 +2,9 @@ package org.ljrobotics.frc2018.subsystems;
 
 import org.ljrobotics.frc2018.commands.WaitSecond;
 import org.ljrobotics.frc2018.commands.auto.ScaleCommand;
+import org.ljrobotics.frc2018.commands.auto.SideRightSwitch;
 import org.ljrobotics.frc2018.commands.auto.SteightPathCommand;
 import org.ljrobotics.frc2018.commands.auto.SwitchCommand;
-import org.ljrobotics.frc2018.commands.auto.TwoCubeCenterLeft;
-import org.ljrobotics.frc2018.commands.auto.TwoCubeCenterRight;
 import org.ljrobotics.frc2018.paths.CenterLeftScale;
 import org.ljrobotics.frc2018.paths.CenterLeftSwitch;
 import org.ljrobotics.frc2018.paths.CenterRightScale;
@@ -18,6 +17,7 @@ import org.ljrobotics.frc2018.paths.RightLeftScale;
 import org.ljrobotics.frc2018.paths.RightLeftSwitch;
 import org.ljrobotics.frc2018.paths.RightRightScale;
 import org.ljrobotics.frc2018.paths.RightRightSwitch;
+import org.ljrobotics.frc2018.paths.SteightPath;
 import org.ljrobotics.lib.util.CrashTracker;
 import org.ljrobotics.lib.util.GameData;
 import org.ljrobotics.lib.util.IncorrectGameData;
@@ -118,6 +118,12 @@ public class AutoSelectorSwitch {
 		case 5:
 			paddleSide = gameData.GetPaddleSide(1);
 			pathContainer = (paddleSide == PaddleSide.LEFT) ? new RightLeftScale() : new RightRightScale();
+			if(paddleSide == PaddleSide.LEFT) {
+				if(gameData.GetPaddleSide(0) == PaddleSide.RIGHT) {
+					return new SideRightSwitch(90);
+				}
+				return new SteightPathCommand();
+			}
 			return new ScaleCommand(pathContainer, (paddleSide == PaddleSide.LEFT) ? -90 : 90);
 		case 6:
 			return new SteightPathCommand();
