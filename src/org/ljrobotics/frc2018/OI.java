@@ -1,6 +1,7 @@
 package org.ljrobotics.frc2018;
 
 import org.ljrobotics.frc2018.commands.ArmSetpoint;
+import org.ljrobotics.frc2018.commands.ButtonCommand;
 import org.ljrobotics.frc2018.commands.ConditionalStowArm;
 import org.ljrobotics.frc2018.commands.IntakeIdle;
 import org.ljrobotics.frc2018.commands.IntakeSpit;
@@ -94,8 +95,12 @@ public class OI {
 		Triggerer.getInstance().addCommand(Triggers.CubeOut,
 				new SetLEDMode(LEDControl.LEDState.OFF));
 		
+		ConditionalStowArm conditionalStowArm = new ConditionalStowArm();
+		JoystickButton button7 = new JoystickButton(this.stick2, 7);
+		ButtonCommand cubeInStow = new ButtonCommand(button7, conditionalStowArm, true);
+		
 		Triggerer.getInstance().addCommand(Triggers.CubeIn, 
-				new ConditionalStowArm());
+				cubeInStow);
 		
 		Triggerer.getInstance().addCommand(Triggers.ArmUp,
 				new LimitSpeed(0.25));
