@@ -16,15 +16,15 @@ public class RightLeftScale implements PathContainer {
     public Path buildPath() {
         ArrayList<Waypoint> sWaypoints = new ArrayList<Waypoint>();
         sWaypoints.add(new Waypoint(20,50,0,0));
-        sWaypoints.add(new Waypoint(50,50,0,60));
-        sWaypoints.add(new Waypoint(190,50,0,60));
-        sWaypoints.add(new Waypoint(240,50,40,60));
-        sWaypoints.add(new Waypoint(240,100,0,60));
-        sWaypoints.add(new Waypoint(240,160,0,60));
-        sWaypoints.add(new Waypoint(240,220,0,60));
-        sWaypoints.add(new Waypoint(240,270,40,60));
-        sWaypoints.add(new Waypoint(290,270,0,60));
-        sWaypoints.add(new Waypoint(335,270,0,60));
+        sWaypoints.add(new Waypoint(50,50,0,75));
+        sWaypoints.add(new Waypoint(190,50,0,75));
+        sWaypoints.add(new Waypoint(245,50,40,75));
+        sWaypoints.add(new Waypoint(245,100,0,75));
+        sWaypoints.add(new Waypoint(245,160,0,75));
+        sWaypoints.add(new Waypoint(245,220,0,75));
+        sWaypoints.add(new Waypoint(245,270,40,75));
+        sWaypoints.add(new Waypoint(295,270,0,75));
+        sWaypoints.add(new Waypoint(335,270,0,75));
 
         return PathBuilder.buildPathFromWaypoints(sWaypoints);
     }

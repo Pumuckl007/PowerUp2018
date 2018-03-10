@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import org.ljrobotics.frc2018.Constants;
-import org.ljrobotics.frc2018.paths.CenterRightScale;
+import org.ljrobotics.frc2018.paths.RightLeftScale;
 import org.ljrobotics.frc2018.paths.TestPath;
 import org.ljrobotics.lib.util.ReflectingCSVWriter;
 import org.ljrobotics.lib.util.control.PathBuilder.Waypoint;
@@ -96,7 +96,7 @@ public class PathFollowerTest {
     
     @Test
     public void testTestPath() {
-        PathContainer container = new CenterRightScale();
+        PathContainer container = new RightLeftScale();
         PathFollower controller = new PathFollower(container.buildPath(), container.isReversed(), kParameters);
 
         ReflectingCSVWriter<PathFollower.DebugOutput> writer = new ReflectingCSVWriter<PathFollower.DebugOutput>(
