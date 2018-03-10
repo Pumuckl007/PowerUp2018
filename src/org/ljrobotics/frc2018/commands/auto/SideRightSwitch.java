@@ -4,7 +4,7 @@ import org.ljrobotics.frc2018.commands.ArmSetpoint;
 import org.ljrobotics.frc2018.commands.DriveForward;
 import org.ljrobotics.frc2018.commands.FollowPath;
 import org.ljrobotics.frc2018.commands.IntakeIdle;
-import org.ljrobotics.frc2018.commands.IntakeSpit;
+import org.ljrobotics.frc2018.commands.IntakeSpitSlow;
 import org.ljrobotics.frc2018.commands.ResetToPathHead;
 import org.ljrobotics.frc2018.commands.TurnToAngle;
 import org.ljrobotics.frc2018.commands.WaitSecond;
@@ -28,7 +28,7 @@ public class SideRightSwitch extends CommandGroup{
 		this.addSequential(new FollowPath(path));
 		this.addSequential(new TurnToAngle(endingAngle));
 		this.addSequential(new DriveForward(0.3, 3));
-		this.addSequential(new IntakeSpit());
+		this.addSequential(new IntakeSpitSlow());
 		this.addSequential(new WaitSecond(1000));
 		this.addSequential(new IntakeIdle());
 		this.addSequential(new DriveForward(-0.2, 0.5));
