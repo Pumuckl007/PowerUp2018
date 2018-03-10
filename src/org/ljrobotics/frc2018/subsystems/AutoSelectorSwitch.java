@@ -110,6 +110,12 @@ public class AutoSelectorSwitch {
 		case 3:
 			paddleSide = gameData.GetPaddleSide(1);
 			pathContainer = (paddleSide == PaddleSide.LEFT) ? new LeftLeftScale() : new LeftRightScale();
+			if(paddleSide == PaddleSide.RIGHT) {
+				if(gameData.GetPaddleSide(0) == PaddleSide.LEFT) {
+					return new SideRightSwitch(-90);
+				}
+				return new SteightPathCommand();
+			}
 			return new ScaleCommand(pathContainer, (paddleSide == PaddleSide.LEFT) ? -90 : 90);
 		case 4:
 			paddleSide = gameData.GetPaddleSide(1);
