@@ -1,19 +1,20 @@
 package org.ljrobotics.lib.util.control;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
 import org.ljrobotics.frc2018.Constants;
+import org.ljrobotics.frc2018.paths.CenterRightScale;
 import org.ljrobotics.frc2018.paths.TestPath;
 import org.ljrobotics.lib.util.ReflectingCSVWriter;
-import org.ljrobotics.lib.util.control.PathFollower;
+import org.ljrobotics.lib.util.control.PathBuilder.Waypoint;
 import org.ljrobotics.lib.util.math.RigidTransform2d;
 import org.ljrobotics.lib.util.math.Rotation2d;
 import org.ljrobotics.lib.util.math.Translation2d;
 import org.ljrobotics.lib.util.math.Twist2d;
-import org.ljrobotics.lib.util.control.PathBuilder.Waypoint;
 
 public class PathFollowerTest {
 
@@ -95,7 +96,7 @@ public class PathFollowerTest {
     
     @Test
     public void testTestPath() {
-        PathContainer container = new TestPath();
+        PathContainer container = new CenterRightScale();
         PathFollower controller = new PathFollower(container.buildPath(), container.isReversed(), kParameters);
 
         ReflectingCSVWriter<PathFollower.DebugOutput> writer = new ReflectingCSVWriter<PathFollower.DebugOutput>(
