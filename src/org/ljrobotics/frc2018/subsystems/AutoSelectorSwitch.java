@@ -112,7 +112,7 @@ public class AutoSelectorSwitch {
 			pathContainer = (paddleSide == PaddleSide.LEFT) ? new LeftLeftScale() : new LeftRightScale();
 			if(paddleSide == PaddleSide.RIGHT) {
 				if(gameData.GetPaddleSide(0) == PaddleSide.LEFT) {
-					return new SideRightSwitch(-90);
+					return new SideRightSwitch(90);
 				}
 				return new SteightPathCommand();
 			}
@@ -126,7 +126,7 @@ public class AutoSelectorSwitch {
 			pathContainer = (paddleSide == PaddleSide.LEFT) ? new RightLeftScale() : new RightRightScale();
 			if(paddleSide == PaddleSide.LEFT) {
 				if(gameData.GetPaddleSide(0) == PaddleSide.RIGHT) {
-					return new SideRightSwitch(90);
+					return new SideRightSwitch(-90);
 				}
 				return new SteightPathCommand();
 			}
